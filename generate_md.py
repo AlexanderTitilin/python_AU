@@ -12,4 +12,4 @@ result = f"\n## {name}\n \
 ```"
 file_for_result = open('leetcode/intervals.md', 'a')
 file_for_result.write(result)
-file_for_result.close()
+file_for_result.close();
