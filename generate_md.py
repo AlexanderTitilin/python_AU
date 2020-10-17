@@ -1,4 +1,4 @@
-﻿source = open("source_leetcode_data.txt")
+﻿source = open("leetcode/source_leetcode_data.txt")
 source = source.readlines()
 name = source[0].split(". ")[1][:-1]
 link = source[1][:-1]
@@ -10,6 +10,6 @@ result = f"\n## {name}\n \
 ```python\n\
 {code}\n\
 ```"
-file_for_result = open('intervals.md','a')
+file_for_result = open('leetcode/intervals.md', 'a')
 file_for_result.write(result)
 file_for_result.close()
