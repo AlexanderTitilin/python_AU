@@ -1,7 +1,7 @@
 ﻿#Math
-+[Palindrome Number](#palindrome-number)
-+[Fizz Buzz](#fizz-buzz)
-+[Base 7](#base-7)
+ + [Palindrome Number](#palindrome-number)
+ + [Fizz Buzz](#fizz-buzz)
+ + [Base 7](#base-7)
 ## Palindrome Number
  https://leetcode.com/problems/palindrome-number/
  ```python
