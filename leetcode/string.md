@@ -1,4 +1,4 @@
-#string
+# String
  + [Valid Anagram](#valid-anagram)
  + [Reverse String](#reverse-string)
  +[ Reverse Vowels of a String](#reverse-vowels-of-a-string)
