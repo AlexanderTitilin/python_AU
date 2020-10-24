@@ -1,6 +1,7 @@
-+[Valid Anagram](#valid-anagram)
-+[Reverse String](#reverse-string)
-+[Reverse Vowels of a String](#reverse-vowels-of-a-string)
+#string
+ + [Valid Anagram](#valid-anagram)
+ + [Reverse String](#reverse-string)
+ +[ Reverse Vowels of a String](#reverse-vowels-of-a-string)
 ## Valid Anagram
  https://leetcode.com/problems/valid-anagram/
  ```python
@@ -57,4 +58,22 @@ def toLowerCase(self, str: str) -> str:
         else:
             result += i
     return result
+```
+## Squares of a Sorted Array
+ https://leetcode.com/problems/squares-of-a-sorted-array/
+ ```python
+def sortedSquares(self, A: List[int]) -> List[int]:
+    A = list(map(lambda x: x**2,A))
+    A.sort()
+    return A
+    
+```
+## Squares of a Sorted Array
+ https://leetcode.com/problems/squares-of-a-sorted-array/
+ ```python
+def sortedSquares(self, A: List[int]) -> List[int]:
+    A = list(map(lambda x: x**2,A))
+    A.sort()
+    return A
+    
 ```
