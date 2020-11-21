@@ -1,8 +1,8 @@
 import sys
 class Point():
-    def __init__(self,x,y):
-        self.x = x
-        self.y = y
+    def __init__(self,coordinates):
+        self.x = float(coordinates[0])
+        self.y = float(coordinates[1])
     def distance(self):
         return (self.x**2 + self.y**2)**0,5
 class Triangle():
@@ -10,3 +10,17 @@ class Triangle():
         self.side1 = side1
         self.side2 = side2
         self.side3 = side3
+def readfile(filename):
+    f = open(filename)
+    return [i for i in f.readline().split()]
+def check_coordinates(coordinates):
+    if len(coordinates) != 3:
+        return False
+    for i in coordinates:
+        if not i.isdigit():
+            return False
+    return True
+coordinates = readfile(sys.argv[1])
+if not check_coordinates(coordinates):
+    print('с координатами проблема')
+else:
