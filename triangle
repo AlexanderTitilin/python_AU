@@ -1,11 +1,11 @@
 import sys
-class Point(self):
+class Point():
     def __init__(self,x,y):
         self.x = x
         self.y = y
     def distance(self):
         return (self.x**2 + self.y**2)**0,5
-class Triangle(self):
+class Triangle():
     def __init__(self,side1,side2,side3):
         self.side1 = side1
         self.side2 = side2
