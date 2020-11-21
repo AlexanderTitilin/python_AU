@@ -13,9 +13,12 @@ class Triangle():
         self.side3 = side3
     def check_triangle(self):
         return self.side1 <= (self.side2 + self.side3) and self.side2 <= (self.side1 + self.side3) and self.side3 <= (self.side2 + self.side1)
-def readfile(filename):
+    def is_good(self):
+        return self.side1 == self.side2 == self.side3
+def read_str_nums(filename):
     f = open(filename)
     return [i for i in f.readline().split()]
+
 def check_nums(coordinates):
     if len(coordinates) != 6:
         return False
@@ -23,11 +26,4 @@ def check_nums(coordinates):
         if not i.isdigit() and i[0] != '-' and not i[1].isdigit():
             return False
     return True
-nums = readfile(sys.argv[1])
-if not check_nums(nums):
-    print('координаты с ошибкой')
-else:
-    nums = [float(num) for num in nums]
-    point1 = Point(nums[0], nums[1])
-    point2 = Point(nums[2],nums[3])
-    point3 = Point(nums[4],nums[5])
+
