@@ -24,3 +24,4 @@ coordinates = readfile(sys.argv[1])
 if not check_coordinates(coordinates):
     print('с координатами проблема')
 else:
+
