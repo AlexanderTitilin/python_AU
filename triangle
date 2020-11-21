@@ -15,15 +15,9 @@ class Triangle():
         return self.side1 <= (self.side2 + self.side3) and self.side2 <= (self.side1 + self.side3) and self.side3 <= (self.side2 + self.side1)
     def is_good(self):
         return self.side1 == self.side2 == self.side3
+    def good_square(self):
+        return (math.sqrt(3) * self.side1) / 4
 def read_str_nums(filename):
     f = open(filename)
-    return [i for i in f.readline().split()]
-
-def check_nums(coordinates):
-    if len(coordinates) != 6:
-        return False
-    for i in coordinates:
-        if not i.isdigit() and i[0] != '-' and not i[1].isdigit():
-            return False
-    return True
+    return [i.strip() for i in f.readlines()]
 
