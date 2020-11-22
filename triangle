@@ -1,18 +1,51 @@
 import sys
 import math
-class Point():
-    def __init__(self,x,y):
-        self.x = x
-        self.y = y
-    def distance(self):
-        return math.sqrt(self.x**2 + self.y**2)
 class Triangle():
-    def __init__(self,side1,side2,side3):
-        self.side1 = side1
-        self.side2 = side2
-        self.side3 = side3
+    def __init__(self,x1,y1,x2,y2,x3,y3):
+        self.x1 = x1
+        self.y1 = y1
+        self.x2 = x2
+        self.y2 = y2
+        self.x3 = x3
+        self.y3 = y3
+        self.side1 = math.sqrt((x1 - x2) ** 2 + (y1 - y2) ** 2)
+        self.side2 = math.sqrt((x2 - x3) ** 2 + (y2 - y3) ** 2)
+        self.side3 = math.sqrt((x3 - x1) ** 2 + (y3 - y1) ** 2)
+    def __str__(self):
+        return f"{self.x1,self.y1,self.x2,self.y2,self.x3,self.y3}"
     def check_triangle(self):
-        return self.side1 <= (self.side2 + self.side3) and self.side2 <= (self.side1 + self.side3) and self.side3 <= (self.side2 + self.side1)
+        return not (self.x1 == self.x2 == self.x3 or self.y1 == self.y2 == self.y3)
     def is_good(self):
         return self.side1 == self.side2 or self.side1 == self.side3 or self.side2 == self.side3
-    def
+    def square(self):
+        p = (self.side1 + self.side2 + self.side3) / 2
+        return math.sqrt(p * (p - self.side1) * (p - self.side2) * (p - self.side3))
+class Utilites():
+    def __init__(self,filename):
+        self.filename = filename
+        f = open(filename)
+        self.nums = [i.strip().split() for i in f.readlines()]
+    def get_good_nums(self):
+        for i in self.nums:
+            if len(i) !=6:
+                self.nums.remove(i)
+        for i in self.nums:
+            for j in i:
+                try:
+                    float(j)
+                except ValueError:
+                    self.nums.remove(i)
+        for i in self.nums:
+            if not i:
+                self.nums.remove(i)
+        self.nums = [[float(j) for j in i] for i in self.nums]
+
+x = Utilites(sys.argv[1])
+x.get_good_nums()
+list_triangles = []
+for i in x.nums:
+    list_triangles.append(Triangle(*i))
+for triangle in list_triangles:
+    if not triangle.is_good() and not triangle.check_triangle():
+        list_triangles.remove(triangle)
+print(max(list_triangles,key=lambda x:x.square()))
