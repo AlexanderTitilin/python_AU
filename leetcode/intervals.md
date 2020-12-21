@@ -1,45 +1,56 @@
-# intervals
- + [Non-overlapping Intervals](#non-overlapping-intervals)
- + [Merge Intervals](#merge-intervals)
- 
 ## Non-overlapping Intervals
- https://leetcode.com/problems/non-overlapping-intervals/
- ```python
-def eraseOverlapIntervals(self, intervals: List[List[int]]) -> int:
-    intervals.sort(key = lambda x: (x[1]))
-    if not intervals:
-        return 0
-    result = 0
-    last_first = intervals[0][0]
-    last_second = intervals[0][1]
-    for i in range(1,len(intervals)):
-        curr_first = intervals[i][0]
-        curr_second = intervals[i][1]
-        if last_second > curr_first:
-            result += 1
-        else:
-            last_first,last_second = curr_first,curr_second
-    return  result
-
+https://leetcode.com/problems/non-overlapping-intervals/
+```python
+class Solution:
+    def eraseOverlapIntervals(self, intervals: List[List[int]]) -> int:
+        if not intervals:
+            return 0
+        intervals.sort()
+        a = intervals[0][0]
+        maxs = 0
+        for i in intervals:
+            if a > i[0]:
+                a = min(a, i[1])
+            else:
+                maxs += 1
+                a = i[1]        
+        return len(intervals) - maxs
 ```
 ## Merge Intervals
- https://leetcode.com/problems/merge-intervals/
- ```python
-def merge(self, intervals: List[List[int]]) -> List[List[int]]:
-    intervals.sort()
-    first = 0
-    second = 1
-    while first < len(intervals):
-        if second >= len(intervals):
-            first += 1
-            second = first + 1
-        elif intervals[first][1] >= intervals[second][0]:
-            new = [intervals[first][0],max(intervals[first][1],intervals[second][1])]
-            del intervals[second]
-            intervals[first] = new
-            second = first + 1
-        else:
-            second += 1
-    return intervals
-
+https://leetcode.com/problems/merge-intervals/
+```python
+class Solution:
+    def merge(self, intervals):
+        intervals.sort()
+        a = []
+        x1 = intervals[0][0]
+        x2 = intervals[0][1]
+        for i in range(1, len(intervals)):
+            if intervals[i][0] > x2
+                a.append([x1, x2])
+                x1 = intervals[i][0]
+                x2 = intervals[i][1]
+            else:
+                if intervals[i][1] > x2:
+                    x2 = intervals[i][1]
+        a.append([x1, x2])
+        return a
 ```
+## Insert Interval
+https://leetcode.com/problems/insert-interval/
+```python
+class Solution:
+    def insert(self, intervals: List[List[int]], newInterval: List[int]) -> List[List[int]]:
+        intervals.append(newInterval)
+        if len(intervals) == 1:
+            return intervals
+        intervals.sort()
+        a = [intervals[0]]
+        for i in intervals[1:]:
+            if i[0] <= a[-1][1]:
+                a[-1][1] = max(a[-1][1], i[1])
+            else:
+                a.append(i)
+        return a
+```
+
