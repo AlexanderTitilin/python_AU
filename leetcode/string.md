@@ -1,79 +1,63 @@
-# String
- + [Valid Anagram](#valid-anagram)
- + [Reverse String](#reverse-string)
- +[ Reverse Vowels of a String](#reverse-vowels-of-a-string)
 ## Valid Anagram
- https://leetcode.com/problems/valid-anagram/
- ```python
-def isAnagram(self, s: str, t: str) -> bool:
-    s_counter = [0]*27
-    t_counter = [0]*27
-    for i in s:
-        s_counter[ord(i) - 96] +=1
-    for i in t:
-        t_counter[ord(i) - 96] +=1
-    return s_counter == t_counter
-
+https://leetcode.com/problems/valid-anagram/
+```python
+class Solution:
+    def isAnagram(self, s: str, t: str) -> bool:
+        a = collections.Counter(s)
+        b = collections.Counter(t)
+        if a == b:
+            return True
+        else:
+            return False
 ```
 ## Reverse String
- https://leetcode.com/problems/reverse-string/
- ```python
-def reverseString(self, s: List[str]) -> None:
-    for i in range(len(s)):
-        s.insert(i,s.pop(len(s) - 1))
-        
-        
-        
+https://leetcode.com/problems/reverse-string/
+```python
+class Solution:
+    def reverseString(self, s: List[str]) -> None:
+        a = []
+        for i in range(len(s) - 1, -1, -1):
+            a.append(s[i])
+        s.clear()
+        s.extend(a)
 ```
 ## Reverse Vowels of a String
- https://leetcode.com/problems/reverse-vowels-of-a-string/
- ```python
-def reverseVowels(self, s: str) -> str:
-    vowels = "aeiouAEIOU"
-    s = list(s)
-    i = 0
-    j = len(s) - 1
-    while i < j:
-        if s[i] not in vowels:
-            i+=1
-        if s[j] not in vowels:
-            j-=1
-        if s[i] in vowels and s[j] in vowels:
-            s[i],s[j] = s[j],s[i]
-            j-=1
-            i+=1
-    return "".join(s)
-        
-        
+https://leetcode.com/problems/reverse-vowels-of-a-string/
+```python
+class Solution:
+    def reverseVowels(self, s: str) -> str:
+        glasnie = ['a', 'e', 'i', 'o', 'u', 'A', 'E', 'I', 'O', 'U']
+        a = []
+        b = []
+        s = list(s)
+        for i, j in enumerate(s):
+            if j in glasnie:
+                b.append(i)
+                a.append(j)
+        a = a[::-1]
+        for i, j in enumerate(b):
+            s[j] = a[i]
+        return ''.join(s)
 ```
-
+## Reverse Words in a String III
+https://leetcode.com/problems/reverse-words-in-a-string-iii/
+```python
+class Solution:
+    def reverseWords(self, s: str) -> str:
+        a = s.split(' ')
+        b = [c[::-1] for c in a]
+        return (' '.join(b))
+```
 ## To Lower Case
- https://leetcode.com/problems/to-lower-case/
- ```python
-def toLowerCase(self, str: str) -> str:
-    result = ''
-    for i in str:
-        if ord(i) > 64 and ord(i) < 91:
-            result += chr(ord(i) + 32)
-        else:
-            result += i
-    return result
-```
-## Squares of a Sorted Array
- https://leetcode.com/problems/squares-of-a-sorted-array/
- ```python
-def sortedSquares(self, A: List[int]) -> List[int]:
-    A = list(map(lambda x: x**2,A))
-    A.sort()
-    return A
-    
-```
-## Squares of a Sorted Array
- https://leetcode.com/problems/squares-of-a-sorted-array/
- ```python
-def sortedSquares(self, A: List[int]) -> List[int]:
-    A = list(map(lambda x: x**2,A))
-    A.sort()
-    return A
-    
+https://leetcode.com/problems/to-lower-case/
+```python
+class Solution:
+    def toLowerCase(self, str: str) -> str:
+        s = ""
+        for i in str:
+            if ord(i) > 64 and ord(i) < 91:
+                s += chr(ord(i) + 32)
+            else:
+                s += i     
+        return s
 ```
