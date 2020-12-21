@@ -1,15 +1,50 @@
-﻿source = open("leetcode/source_leetcode_data.txt")
-source = source.readlines()
-name = source[0].split(". ")[1][:-1]
-link = source[1][:-1]
-name_from_link = link.split("https://leetcode.com/problems/")[1][:-1]
-code_list=[line[4:] for line in source[3:]]
-code = ''.join(code_list)
-result = f"\n## {name}\n \
-{link}\n \
-```python\n\
-{code}\n\
-```"
-file_for_result = open('leetcode/intervals.md', 'a')
-file_for_result.write(result)
-file_for_result.close()
+class Task:
+    def __init__(self, file):
+        title = file.readline()
+        title = title[:-1]
+        self.title = "## {} \n".format(title)
+        link = file.readline()
+        self.link = "{}".format(link)
+        self.menulink = "+ [{0}](#{1})".format(title, link.split('/')[-2])
+        self.code = []
+        self.code.append('```python\n')
+        for i in file.readlines():
+            self.code.append(i)
+        self.code.append('\n')
+        self.code.append('```\n')
+
+class MdFile:
+    def __init__(self, file):
+        self.title = file.readline()
+        self.menu = []
+        file.readline()
+        cur_line = file.readline()
+        while cur_line and cur_line[0] == '+':
+            self.menu.append(cur_line)
+            cur_line = file.readline()
+        self.code = []
+        self.code.append(cur_line)
+        for i in file.readlines():
+            self.code.append(i)
+
+SourceFile = open("source_leetcode_data.txt", 'r')
+task = Task(SourceFile)
+SourceFile.close()
+
+FileName = input()
+MdHolder = open("math.md", 'r')
+mdfile = MdFile(MdHolder)
+MdHolder.close()
+
+OutputFile = open("math.md", 'w')
+OutputFile.write('# ' + FileName + '\n\n')
+for i in range(len(mdfile.menu)):
+    OutputFile.write(mdfile.menu[i])
+OutputFile.write(task.menulink + '\n')
+for i in range(len(mdfile.code)):
+    OutputFile.write(mdfile.code[i])
+OutputFile.write(task.title + '\n')
+OutputFile.write(task.link + '\n')
+for i in task.code:
+    OutputFile.write(i)
+OutputFile.close()
